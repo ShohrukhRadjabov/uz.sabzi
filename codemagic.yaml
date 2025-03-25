@@ -1,0 +1,27 @@
+workflows:
+  android-workflow:
+    name: Android Workflow
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Set up Flutter project
+        script: |
+          # Create a new Flutter project
+          flutter create --org uz.sabzi .
+          
+          # This ensures the Android directory structure exists
+          # The existing lib/ and pubspec.yaml will be preserved
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Build APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - your.email@example.com
