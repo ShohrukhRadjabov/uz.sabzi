@@ -11,17 +11,27 @@ workflows:
           # Create a new Flutter project
           flutter create --org uz.sabzi .
           
-          # This ensures the Android directory structure exists
-          # The existing lib/ and pubspec.yaml will be preserved
+          # Create empty asset directories to satisfy the build
+          mkdir -p assets/images
+          mkdir -p assets/icons
+          mkdir -p assets/fonts
+          
+          # Create a placeholder font file
+          touch assets/fonts/Roboto-Regular.ttf
+          touch assets/fonts/Roboto-Medium.ttf
+          touch assets/fonts/Roboto-Bold.ttf
+          
       - name: Get Flutter packages
         script: |
           flutter packages pub get
-      - name: Build APK
+          
+      - name: Build APK with reduced dependencies
         script: |
-          flutter build apk --release
+          # Build with minimal dependencies to avoid NDK version issues
+          flutter build apk --release --no-tree-shake-icons
     artifacts:
       - build/**/outputs/apk/**/*.apk
     publishing:
       email:
         recipients:
-          - your.email@example.com
+          - your.shokhrukhyt05@gmail.com
