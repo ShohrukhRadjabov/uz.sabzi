@@ -35,7 +35,7 @@ class SabziApp extends StatelessWidget {
           secondary: const Color(0xFF4A6CFA),
         ),
         useMaterial3: true,
-        fontFamily: 'Roboto',
+        ffontFamily: 'Roboto',
       ),
       locale: localeProvider.locale,
       localizationsDelegates: const [
